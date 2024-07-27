@@ -3,7 +3,7 @@ import { globalContext } from './App';
 import Navigation from './navigation';
 
 function Profile() {
-    const {globalIsLogin, setGlobalIsLogin} = useContext(globalContext);
+    const {globalIsLogin} = useContext(globalContext);
     const { globalUserObject } = useContext(globalContext);
     const [showPassword, setShowPassword] = useState(false);
     const [eyeIcon, setEyeIcon] = useState(true);
