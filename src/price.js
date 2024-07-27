@@ -1,13 +1,12 @@
-
 import React, { useState, useContext, useEffect } from 'react';
 import { globalContext } from './App';
 
-function Price() {
-    const { card } = useContext(globalContext);
+function Price({ p , q}) {
+    const {globalPrice, setGlobalPrice} = useContext(globalContext);
     const { globalCount, setGlobalCount } = useContext(globalContext);
-    const [mrp, setMrp] = useState(card.price);
-    const [number, setNumber] = useState(1);
-    const [number1, setNumber1] = useState(card.price);
+    const [mrp, setMrp] = useState(p); 
+    const [number, setNumber] = useState(q);
+    const [totalPrice, setTotalPrice] = useState(p); 
 
     useEffect(() => {
         console.log("Mounted");
@@ -16,20 +15,22 @@ function Price() {
         console.log(mrp * number);
         return () => {
             console.log("Unmounted");
-        };
+        };``
     }, []);
 
     useEffect(() => {
         console.log("Updated!!!");
-    }, [number, number1]);
+        setTotalPrice(mrp * number); 
+       
+    }, [number, mrp]);
 
     const funcBtnClick = () => {
         console.log("Button Clicked");
         if (number > 1) {
             setNumber(prevNumber => {
                 const newNumber = prevNumber - 1;
-                setNumber1(mrp * newNumber);
                 setGlobalCount(globalCount - 1);
+                setGlobalPrice(globalPrice - mrp);
                 return newNumber;
             });
         }
@@ -39,22 +40,18 @@ function Price() {
         console.log("Button Clicked");
         setNumber(prevNumber => {
             const newNumber = prevNumber + 1;
-            setNumber1(mrp * newNumber);
             setGlobalCount(globalCount + 1);
+            setGlobalPrice(globalPrice + mrp);
             return newNumber;
         });
     };
 
     return (
         <div>
-            <p>
-                Price: Rs. {mrp} 
-            </p>
-            <p>    
-                Total: Rs. {number1}
-            </p>
+            <p>Price: Rs. {mrp}</p>
+            <p>Total: Rs. {totalPrice}</p>
             <div>
-                <div style={{ display: "flex" , marginTop:-15}}>
+                <div style={{ display: "flex", marginTop: -15 }}>
                     <button
                         className="btn btn-primary"
                         onClick={funcBtnClick}
