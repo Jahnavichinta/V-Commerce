@@ -8,7 +8,7 @@ function RegisterPage() {
     const [branchValue, setBranch] = useState('');
     const [genderValue, setGender] = useState('');
     const [yearValue, setYear] = useState('');
-    const [setUser] = useState({});
+    // const {setUser} = useState({});
     const { setGlobalUserObject} = useContext(globalContext);
 
     const getCollegeId = (event) => {
@@ -35,7 +35,7 @@ function RegisterPage() {
         const obj = {
             collegeIdValue, branchValue, passwordValue, emailValue, yearValue, genderValue
         }
-        setUser(obj);
+        // setUser(obj);
         setGlobalUserObject(obj);
         console.log(obj);
 
